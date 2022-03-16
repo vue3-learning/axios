@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import './styles/index.css'
 import elementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 import nelielUI from 'neliel-ui'
