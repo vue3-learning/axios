@@ -4,10 +4,11 @@ import './styles/index.css'
 import elementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 import nelielUI from 'neliel-ui'
-import './http'
+import http from './http'
 
 Vue.use(elementUI)
 Vue.use(nelielUI)
+Vue.prototype.$http = http
 
 Vue.config.productionTip = false
 

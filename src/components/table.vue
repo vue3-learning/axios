@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import http from '../http'
 
 export default {
   data() {
@@ -42,10 +41,9 @@ export default {
           index: index - 1,
           size
         }
-        const { data } = await http.get('/merchant/welfare/section/productList', { params })
+        const { data } = await this.$http.get('/merchant/welfare/section/productList', { params })
         this.tableProps.data = data.data.content
         this.tableProps.total = data.data.total
-        console.log(this.tableProps.data)
       } catch (e) {
         console.error(e)
       } finally {
