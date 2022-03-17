@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -39,13 +38,18 @@ export default {
         const { index, size } = this.tableProps.paginationInfo
         const params = {
           index: index - 1,
-          size
+          size,
         }
-        const { data } = await this.$http.get('/merchant/welfare/section/productList', { params })
+        // const { data } = await this.$http.get('/merchant/welfare/section/productList', { params })
+        const { data } = await this.$http({
+          url: '/merchant/welfare/section/productList',
+          method: 'get',
+          params
+        })
         this.tableProps.data = data.data.content
         this.tableProps.total = data.data.total
       } catch (e) {
-        console.error(e)
+        this.$log.error(e.message)
       } finally {
         this.loading = false
       }

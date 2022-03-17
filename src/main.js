@@ -5,10 +5,12 @@ import elementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 import nelielUI from 'neliel-ui'
 import http from './http'
+import log from './utils/log'
 
 Vue.use(elementUI)
 Vue.use(nelielUI)
 Vue.prototype.$http = http
+Vue.prototype.$log = log
 
 Vue.config.productionTip = false
 
