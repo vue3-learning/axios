@@ -1,11 +1,26 @@
 <template>
   <n-panel style="padding: 20px;">
-    <n-table v-bind="tableProps" @page-change="search" v-loading="loading" />
+    <n-table v-bind="tableProps" :columns="tableColumns" @page-change="search" v-loading="loading" />
   </n-panel>
 </template>
 
 <script>
 export default {
+  props: {
+    tableColumns: {
+      type: Array,
+      default: () => []
+    },
+  },
+  watch: {
+    tableColumns: {
+      handler(n, o) {
+        console.log(n, o)
+      },
+      immediate: true,
+      deep: true
+    }
+  },
   data() {
     return {
       loading: false,
@@ -19,12 +34,12 @@ export default {
           layout: 'total, prev, pager, next, jumper',
           background: true
         },
-        columns: [
-          { align: 'center', type: 'index', label: '索引' },
-          { align: 'center', prop: 'id', label: '商品编号' },
-          { align: 'center', prop: 'title', label: '商品名称' },
-          { align: 'center', prop: 'shopName', label: '店铺名称' },
-        ],
+        // columns: [
+        //   { align: 'center', type: 'index', label: '索引' },
+        //   { align: 'center', prop: 'id', label: '商品编号' },
+        //   { align: 'center', prop: 'title', label: '商品名称' },
+        //   { align: 'center', prop: 'shopName', label: '店铺名称' },
+        // ],
         data: null,
         total: null,
       }
@@ -32,11 +47,13 @@ export default {
   },
 
   methods: {
-    async search() {
+    async search(form) {
       try {
-        // this.loading = true
+        this.loading = true
         const { index, size } = this.tableProps.paginationInfo
+        console.log(index,size)
         const params = {
+          ...form,
           index: index - 1,
           size,
         }

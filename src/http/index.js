@@ -9,15 +9,15 @@ const { retryRequestList} = httpSettings
 const http = axios.create()
 axios.defaults.withCredentials = true
 
-httpSettings.cancelToken && useCancelToken(http)
-httpSettings.retryRequest && useRetryRequest(http, {
-  maxRetryTimes: 3,
-  retryDelay: 400,
-  retryRequestList
-})
+// httpSettings.cancelToken && useCancelToken(http)
+// httpSettings.retryRequest && useRetryRequest(http, {
+//   maxRetryTimes: 3,
+//   retryDelay: 400,
+//   retryRequestList
+// })
 
 http.interceptors.request.use(async config => {
-  console.log('http config', config)
+  // console.log('http config', config)
 
   config.withCredentials = true
 
@@ -33,7 +33,7 @@ http.interceptors.request.use(async config => {
 })
 
 http.interceptors.response.use(response => {
-  console.log('http response', response)
+  // console.log('http response', response)
   if (['10003', '10004'].includes(response.data.code)) { // 用户未登录或登录过期
     delCookie('token')
   }

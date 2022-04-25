@@ -2,3 +2,41 @@
   text-align: right;
   margin-top: 20px;
 }
+.text-right {
+  text-align: right;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
+.mr-10 {
+  margin-right: 10px;
+}
+.mr-30 {
+  margin-right: 30px;
+}
+.inline-block {
+  display: inline-block;
+  width: 100px;
+}
+.card-content .el-form-item {
+  margin-bottom: 0;
+}
+
+.options-label, .options-value {
+  display: inline-block;
+  width: 50%;
+}
+.options-label .name, .options-value .name {
+  width: 40px;
+}
+.options-label .options-input, .options-value .options-input {
+  margin-left: 10px;
+  display: inline-block;
+}
+.card-content .options {
+  border: 1px dotted;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  position: relative;
+}
