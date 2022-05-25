@@ -40,3 +40,24 @@
   margin-bottom: 10px;
   position: relative;
 }
+.form-item, .column-item {
+  border: 1px dotted #aaaaaa;
+  border-radius: 10px;
+  padding: 10px;
+  display: inline-block;
+  position: relative;
+  margin: 0 10px 10px 0;
+}
+.el-icon-close {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  margin-top: -8px
+}
+.position-r {
+  position: relative;
+}
+.list-group-item {
+  margin-right: 10px;
+}

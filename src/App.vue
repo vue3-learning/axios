@@ -22,7 +22,6 @@ export default {
 
   methods: {
     handleClick() {
-      console.log(this.tabProps.activeName)
       this.$router.push({ name: this.tabProps.activeName })
     }
   },

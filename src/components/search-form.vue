@@ -1,4 +1,6 @@
 <script>
+import { downloadFile } from '../utils/download'
+
 const splitByDot = function(value) {
   if (value) {
     return value.split('.')
@@ -35,13 +37,15 @@ export default {
     },
     formList: {
       type: Array,
-      default() {
-        return [];
-      },
+      default: () => [],
+    },
+    slotButtonList: {
+      type: Array,
+      default: () => []
     },
     resetForm: {
-      //充值表单
       type: Object,
+      default: () => ({}),
     },
   },
 
@@ -188,7 +192,7 @@ export default {
         // 如果有传递resetForm,则使用resetForm数据重置
         Object.keys(this.form).forEach((k) => {
           if (keyArr.includes(k)) {
-            this.form[k] = this.$clone(this.initForm[k]);
+            this.form[k] = JSON.parse(JSON.stringify(this.initForm[k] || ''));
           }
         });
       } else {
@@ -217,6 +221,10 @@ export default {
         setValByKey(this.form, key || item.model, val);
       }
     },
+
+    exports(url, fileName) {
+      downloadFile('/merchant/' + url, this.form, fileName)
+    }
   },
 
   render(h) {
@@ -236,7 +244,7 @@ export default {
       ),
       'select': item => (
         <el-select
-          class="width-100"
+          class="full-width"
           v-model={this.form[item.model]}
           placeholder={item.placeholder ? item.placeholder : `请输入${item.label || ''}`}
         >
@@ -249,12 +257,33 @@ export default {
           ))}
         </el-select>
       ),
+      'date': item => (
+        <el-date-picker
+          class="full-width"
+          v-model={this.form[item.model]}
+          type="date"
+          format="yyyy-MM-dd"
+          value-format="yyyy-MM-dd"
+          placeholder={item.placeholder ? item.placeholder : `请输入${item.label || ''}`}
+        />
+      ),
       'month': item => (
         <el-date-picker
+          class="full-width"
           v-model={this.form[item.model]}
           type="month"
           format="yyyy-MM"
           value-format="yyyy-MM"
+          placeholder={item.placeholder ? item.placeholder : `请选择${item.label || ''}`}
+        />
+      ),
+      'year': item => (
+        <el-date-picker
+          class="full-width"
+          v-model={this.form[item.model]}
+          type="year"
+          format="yyyy"
+          value-format="yyyy"
           placeholder={item.placeholder ? item.placeholder : `请选择${item.label || ''}`}
         />
       ),
@@ -275,6 +304,11 @@ export default {
     }
     const generateDom = ele => {
       return map[ele.type] && map[ele.type](ele)
+    }
+
+    const buttomThis = {
+      router: this.$router,
+      exports: this.exports,
     }
 
     return (
@@ -298,6 +332,9 @@ export default {
         <div class="search-btns">
           <el-button type="primary" onClick={() => this.search()}>查询</el-button>
           <el-button onClick={() => this.reset()}>重置</el-button>
+          {this.slotButtonList.map(ele => (
+            <el-button type={ele.type} onClick={(e) => eval(ele.onClick)(buttomThis)}>{ele.name}</el-button>
+          ))}
         </div>
       </el-form>
     )

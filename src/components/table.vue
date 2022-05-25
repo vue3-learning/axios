@@ -1,6 +1,12 @@
 <template>
   <n-panel style="padding: 20px;">
-    <n-table v-bind="tableProps" :columns="tableColumns" @page-change="search" v-loading="loading" />
+    <n-table
+      v-bind="tableProps"
+      :columns="tableColumns"
+      :operator="tableOperators"
+      @page-change="search"
+      v-loading="loading"
+    />
   </n-panel>
 </template>
 
@@ -11,14 +17,10 @@ export default {
       type: Array,
       default: () => []
     },
-  },
-  watch: {
-    tableColumns: {
-      handler(n, o) {
-        console.log(n, o)
-      },
-      immediate: true,
-      deep: true
+
+    tableOperators: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
@@ -33,6 +35,10 @@ export default {
         paginationProps: {
           layout: 'total, prev, pager, next, jumper',
           background: true
+        },
+        operatorProps: {
+          minWidth: '80px',
+					align: 'center',
         },
         // columns: [
         //   { align: 'center', type: 'index', label: '索引' },
@@ -51,7 +57,6 @@ export default {
       try {
         this.loading = true
         const { index, size } = this.tableProps.paginationInfo
-        console.log(index,size)
         const params = {
           ...form,
           index: index - 1,

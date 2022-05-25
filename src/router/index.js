@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Empty from '../views/Empty'
 import Layout from '../views/Layout'
-import Home from '../Home'
+import FormEngine from '../components/form-engine'
 
 Vue.use(VueRouter)
 
@@ -16,7 +16,7 @@ const routes = [
       {
         path: '/home',
         name: 'Home',
-        component: Home,
+        component: FormEngine,
       },
       {
         path: '/preview',

@@ -1,13 +1,13 @@
 <template>
   <div class="form-item" @click="handleSelectFormItem(formItem)">
-    <div class="form-item-title">
+    <div class="position-r">
       <el-popover
-        placement="top"
+        placement="bottom"
         trigger="click"
         width="560"
         v-model="popoverVisible"
       >
-        <el-form class="card-content" label-position="right" label-width="auto">
+        <el-form class="card-content" label-position="right" label-width="100px">
           <el-form-item label="label">
             <el-input size="mini" v-model="formItem.label" placeholder="请输入" />
           </el-form-item>
@@ -50,7 +50,7 @@
 
 
         <div slot="reference">
-          <el-tag class="mr-10">{{ formItem.label || '&nbsp;' }}</el-tag>
+          <el-tag class="mr-10">{{ formItem.label && formItem.label.trim() || '&nbsp;' }}</el-tag>
           <el-tag class="mr-30">{{ formItem.name }}</el-tag>
         </div>
         
@@ -89,26 +89,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.form-item, .table-item {
-  border: 1px dotted #aaaaaa;
-  border-radius: 10px;
-  padding: 10px;
-  display: inline-block;
-  position: relative;
-  margin: 0 10px 10px 0;
-}
-.form-item-title {
-  position: relative;
-  /* margin-bottom: 10px; */
-}
-.el-icon-close {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  right: 4px;
-  margin-top: -8px
-}
-
-</style>
